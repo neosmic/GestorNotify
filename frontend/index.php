@@ -12,9 +12,45 @@
     
         <?php
         session_start();
-if (isset($_SESSION["usuario"])){
-    require "notas.php";
+//echo $_SESSION["token"];
 
+
+
+/*
+$remotetoken = sha1("leusnerdus");
+echo "<br>remote: ".$remotetoken."<br>";
+echo "local: ".$_SESSION["token"]."<br>";
+*/
+
+if ($_SESSION["token"] != ""){
+    $url = "http://localhost/gestornotify/gestornotify/serverauth/auth.php";
+    $ch = curl_init($url);
+    /*
+    $parametros = array(
+        "CLIENT_ID"=>"$user",
+        "SECRET"=>"$pwd");
+        */
+        $token =$_SESSION["token"];
+    $parametros=['HTTP_X_TOKEN'=>$token];
+    //curl_setopt($ch, CURLOPT, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $parametros);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 100);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $respuesta = curl_exec($ch);
+    //echo "aquí debe salir la respuesta: ";
+    //print_r($respuesta);
+    curl_close($ch);
+    
+}
+echo "respuesta: ".$respuesta;
+
+
+
+
+
+
+if ($respuesta == "true"){
+    require "notas.php";
 }else{ include "login.php"; }
 
 

@@ -9,6 +9,7 @@ class Notas{
     public $contenido;
     public $imagen;
     private $conexion;
+    private $owner;
 
     public function __construct(){
         $conexion = new Conexion();
