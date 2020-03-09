@@ -3,7 +3,7 @@
 class Conexion{
     private $datos = array(
       "host" => "localhost",
-      "user" => "dbuser",
+      "user" => "usergnotas",
       "db" => "gnotas",
       "pass" => "anotaciones de usuario"
     );
@@ -18,11 +18,13 @@ class Conexion{
 
 
     }
-    public function get($atributo){
-      return $this->$atributo;
+      
+      public function get($atributo){
+        return $this->$atributo;
     }
     public function set($atributo, $contenido){
       $this->$atributo = $contenido;
+      //falta el método para actualizar a la base de datos.
     }
 
 

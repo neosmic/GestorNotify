@@ -1,5 +1,5 @@
 # GestorNotify
-Proyecto de gestión de notas
+Proyecto de gestión de notas simple
 
 Desarrollado en PHP sobre Apache
 Utiliza API REST
