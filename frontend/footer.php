@@ -6,7 +6,7 @@
         $('#messages').show();
         $.ajax( {
             'dataType': "json",
-            'url': 'http://localhost/gestornotify/gestornotify/backend/',
+            'url': 'http://localhost/gestornotify/gestornotify/backend/index.php?user_id='+$("#user_id").html()+'&token='+$("#dueToken").html()+'',
             'success' : function( data ) {
                 $('#messages').hide();
                 $('#notasTable > tbody').empty();
@@ -25,20 +25,25 @@
         $('#notasTable > tbody').append('<tr><td>' + nota.titulo + '</td><td>' + nota.contenido + '</td><td></td></tr>');
     }
 
-    $('#notaSave').click( function( ) {
+    $('#nuevaNota').click( function( ) {
         var newnota = {
             titulo: $('#notaTitle').val(),
-            contenido: $('#notaContenidoId').val(),
-            id_genero: $('#notaFecha').val(),
+            contenido: $('#notaContenido').val(),
+            categoria: $('#notaCategoria').val(),
+            usuario_id: $("#user_id").html(),
+            token: $("#dueToken").html()
         }
 
-        $('#messages').first('p').text('Guardando libro...');
+        $('#messages').first('p').text('Guardando Nota...');
         $('#messages').show();
+        console.log(newnota);
         $.ajax( {
-            'url': window.location.href + (window.location.href.substr(window.location.href.length - 1) == '/' ? '' : '/' ) + 'notas',
+            'url': 'http://localhost/gestornotify/gestornotify/backend/',
             'method': 'POST',
-            'data': JSON.stringify( newnota ),
+            'data': newnota,
             'success' : function( data ) {
+                console.log(data);
+                var shower = JSON.stringify( newnota );
                 $('#messages').hide();
                 addnota( newnota );
             }

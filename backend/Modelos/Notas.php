@@ -18,7 +18,7 @@ class Notas{
 
     }
 
-    public function crearNota($datosJSON){
+    public function crearNotas($datosJSON){
         $query = "INSERT INTO notas (titulo, contenido, categoria, usuario_id)
         VALUES ('{$datosJSON["titulo"]}', '{$datosJSON["contenido"]}', '{$datosJSON["categoria"]}','{$this->usuario_id}')";
         $this->conexion->consultaSimple($query);

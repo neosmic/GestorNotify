@@ -12,7 +12,7 @@
     
         <?php
         session_start();
-//echo $_SESSION["token"];
+print_r($_SESSION);
 
 
 

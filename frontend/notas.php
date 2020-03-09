@@ -1,5 +1,7 @@
 <body>
     <h2>Usuario: <span id="usuario"><?= $_SESSION["usuario"];?></span></h2>
+    <div id="user_id" hidden><?= $_SESSION["user_id"] ; ?></div>
+    <div id="dueToken" hidden><?= $_SESSION["token"] ; ?></div>
     <div class="container">
         <table id="notasTable" class="table">
             <thead>
@@ -10,7 +12,8 @@
                 </tr>
             </thead>
             <tbody>
-        </tbody>
+            
+            </tbody>
         </table>
         
         <a class="btn btn-primary" href="salir.php" >Salir</a>
@@ -20,21 +23,24 @@
         </div>
         <div style="display: none;" id="notaForm">
             <hr/>
-            <table>
+            <h2>Agregar nota</h2>
+            <table class="table" >
+            <thead>
                 <tr>
-                    <td>Titulo:</td>
+                    <th>Titulo</th>
+                    <th>Contenido</th>
+                    <th>Categoria</th>
+                </tr>
+            </thead>
+                <tr>
+                    
                     <td><input type="text" name="notaTitle" id="notaTitle"></td>
+                    <td><input type="text" name="notaContenido" id="notaContenido" min="1"></td>
+                    <td><input type="text" name="notaCategoria" id="notaCategoria" min="1"></td>
                 </tr>
+                
                 <tr>
-                    <td>Contenido:</td>
-                    <td><input type="number" name="notaContenidoId" id="notaContenidoId" min="1"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="button" value="Guardar" id="notaSave"/></td>
+                    <td colspan="2"><input type="button" value="Guardar" id="nuevaNota"/></td>
                 </tr>
             </table>
         </div>

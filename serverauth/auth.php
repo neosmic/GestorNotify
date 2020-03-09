@@ -8,8 +8,9 @@ Controlador\Autoload::run();
 header( 'Content-Type: application/json' );
 
 $method = strtoupper( $_SERVER['REQUEST_METHOD'] );
-
-$token = sha1("leusnerdus");
+$dueToken = date('Y-m-d H');
+$dueToken = $dueToken."leusnerdus";
+$token = sha1($dueToken);
 //echo $token;
 //echo "<br>".sha1("jav12")."<br>";
 //print_r($_SERVER);
@@ -25,8 +26,16 @@ if ( $method === 'POST' && !array_key_exists( 'HTTP_X_TOKEN', $_POST ) ) {
 
     ///validación con la base de usuarios
     $comprobacion = new Controlador\Usuarios;
-    if ($comprobacion->comprobacion($clientId,$secret)){
-        echo $token;
+    $out = $comprobacion->comprobacion($clientId,$secret);
+    $out = strval($out[0]["id_ugn"]) ;
+    //print_r($out);
+    //echo "<br>";
+    if ($out){
+        $out = [
+            "token"=>$token,
+            "user_id"=>$out
+        ];
+        echo json_encode($out);
     } else {
         http_response_code( 403 );
         die ( "No autorizado");

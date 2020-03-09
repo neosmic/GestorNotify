@@ -14,10 +14,11 @@ class Usuarios{
         
         $this->conn = new Conexion;
 
-        $query = "SELECT * FROM usuarios WHERE name = '{$usuario}' AND password = '{$clave}' ";
+        $query = "SELECT id_ugn FROM usuarios WHERE name = '{$usuario}' AND password = '{$clave}' ";
         //echo "<br>".$query."<br>";
-        $this->conn->consultaRetorno($query);
-        if ($this->conn->consultaRetorno($query) != false ){return true;}
+        $usuario_id = $this->conn->consultaRetorno($query);
+
+        if ($usuario_id != false ){return $usuario_id;}else{return false;}
     }
 
 
