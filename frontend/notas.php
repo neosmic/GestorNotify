@@ -9,10 +9,12 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-        </table>
-        <tbody>
+            <tbody>
         </tbody>
+        </table>
+        
         <a class="btn btn-primary" href="salir.php" >Salir</a>
+        <input type="button" class="btn btn-primary" value="Mostrar Notas" id="cargarnotas"/>
         <div style="display: none;" id="messages">
             <p></p>
         </div>
@@ -28,8 +30,8 @@
                     <td><input type="number" name="notaContenidoId" id="notaContenidoId" min="1"></td>
                 </tr>
                 <tr>
-                    <td>Fecha:</td>
-                    <td><input type="number" name="notaFecha" id="notaFecha" min="1"></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="button" value="Guardar" id="notaSave"/></td>

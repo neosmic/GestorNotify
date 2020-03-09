@@ -1,14 +1,17 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript">
-    $('#loadnotas').click( function( ) {
-        $('#messages').first('p').text('Cargando libros...');
+    $('#cargarnotas').click( function( ) {
+        $('#messages').first('p').text('Cargando notas...');
         $('#messages').show();
         $.ajax( {
-            'url': window.location.href + (window.location.href.substr(window.location.href.length - 1) == '/' ? '' : '/' ) + 'notas',
+            'dataType': "json",
+            'url': 'http://localhost/gestornotify/gestornotify/backend/',
             'success' : function( data ) {
                 $('#messages').hide();
                 $('#notasTable > tbody').empty();
+                //$("#notasTable").html(data);
+                //console.log(data);
                 for ( b in data ) {
                     addnota( data[b] );
                 }
@@ -19,7 +22,7 @@
 
     function addnota( nota )
     {
-        $('#notasTable tr:last').after('<tr><td>' + nota.titulo + '</td><td>' + nota.id_autor + '</td><td>' + nota.id_genero + '</td></tr>');
+        $('#notasTable > tbody').append('<tr><td>' + nota.titulo + '</td><td>' + nota.contenido + '</td><td></td></tr>');
     }
 
     $('#notaSave').click( function( ) {
@@ -41,6 +44,8 @@
             }
         } );
     });
+
+
     </script>
     
 </html>

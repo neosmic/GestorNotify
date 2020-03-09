@@ -9,25 +9,25 @@ class Notas{
     public $contenido;
     public $imagen;
     private $conexion;
-    private $owner;
+    private $usuario_id;
 
-    public function __construct(){
+    public function __construct($owner){
         $conexion = new Conexion();
         $this->conexion = $conexion;
+        $this->usuario_id = $owner;
 
     }
 
     public function crearNota($datosJSON){
-        $query = "INSERT INTO notas (titulo, contenido, categoria)
-        VALUES ('{$datosJSON["titulo"]}', '{$datosJSON["contenido"]}', '{$datosJSON["categoria"]}')";
+        $query = "INSERT INTO notas (titulo, contenido, categoria, usuario_id)
+        VALUES ('{$datosJSON["titulo"]}', '{$datosJSON["contenido"]}', '{$datosJSON["categoria"]}','{$this->usuario_id}')";
         $this->conexion->consultaSimple($query);
-
     }
 
     public function actualizarNota($datosJSON){
         $query = "UPDATE notas 
         SET titulo = '{$datosJSON["titulo"]}' , contenido = '{$datosJSON["contenido"]}', categoria = '{$datosJSON["categoria"]}'
-        WHERE nota_id = {$datosJSON["nota_id"]} ";
+        WHERE (nota_id = {$datosJSON["nota_id"]} AND usuario_id ='{$this->usuario_id}' )";
         $this->conexion->consultaSimple($query);
     }
 
@@ -39,9 +39,10 @@ class Notas{
         $this->conexion->consultaSimple($query);
     }
 
-    public function mostrarNota($datosJSON){
-        $query = "SELECT * FROM notas WHERE nota_id = '{$datosJSON["nota_id"]}'";
-        return $this->conexion->consultaSimple($query);
+    public function mostrarNotas(){
+        $query = "SELECT * FROM notas WHERE usuario_id ='{$this->usuario_id}'";
+        //echo $query;
+        return $this->conexion->consultaRetorno($query);
 
     }
 

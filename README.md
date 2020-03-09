@@ -36,9 +36,4 @@ Acceso para el servidor de Autorización (sin las comillas):
         "db" = "usuariosgnote",
         "pass" = "validador de servidor"
 
-
-
-
-
-
-
+Cada carpeta de servicio debe montarse en una carpeta pública en un servidor Apache 

@@ -6,13 +6,20 @@ require_once "Controlador/Autoload.php";
 Controlador\Autoload::run();
 header( 'Content-Type: application/json' );
 
-$nota = new Modelos\Notas;
-/*$datos = array('titulo' => "Segunda Nota",
-                            'contenido' => "Esta es la nota de reemplazo",
-                            'categoria' => "Principal",
-                            'nota_id' => "2"
- );*/
- $datos = array("nota_id" => "1");
-$nota->eliminarNota($datos);
+$notas = new Modelos\Notas("1000");
+
+$datos = array('titulo' => "Tercera Nota",
+                'contenido' => "Esta es la nota de reemplazo",
+                'categoria' => "Principal",
+                'nota_id' => "2"
+ );
+ 
+$datos = array(array("titulo" => "Segunda nota","contenido"=>"Realización de API por microservicios"));
+//$notas->crearNota($datos);
+//print_r($notas->mostrarNotas());
+echo json_encode($notas->mostrarNotas(), true);
+
+
+
 
 ?>
